@@ -10,5 +10,11 @@ urlpatterns = [
     path("api/v1/reviews/", views.review_list),
     path("api/v1/reviews/<int:id>/", views.get_review),
     path("api/v1/movies/reviews/", views.movie_list),
+    path("api/v1/directors/", views.DirectorListApiView.as_view()),
+    path("api/v1/directors/<int:id>/", views.DirectorDeleteApiView.as_view()),
+    path("api/v1/movies/", views.MovieListApiView.as_view()),
+    path("api/v1/movies/<int:id>/", views.MovieDeleteApiView.as_view()),
+    path("api/v1/reviews/", views.ReviewListApiView.as_view()),
+    path("api/v1/reviews/<int:id>/", views.ReviewDeleteApiView.as_view()),
 
 ]

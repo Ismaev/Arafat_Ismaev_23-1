@@ -4,7 +4,11 @@ from rest_framework.response import Response
 from movie_app.serialiezers import *
 from movie_app.models import *
 from django.shortcuts import get_object_or_404
+from rest_framework.generics import ListAPIView, ListCreateAPIView, DestroyAPIView
 
+class DirectorListApiView(ListCreateAPIView):
+    queryset = Director.objects.all
+    serializer_class = DirectorSerializer
 @api_view(["GET", "POST"])
 def director_list(request):
     if request.method == "GET":
@@ -20,7 +24,9 @@ def director_list(request):
 
 
 
-
+class DirectorDeleteApiView(DestroyAPIView):
+    queryset = Director.objects.all
+    serializer_class = DirectorSerializer
 @api_view(["GET", "PUT", "DELETE"])
 def get_director(request, id):
     director = get_object_or_404(Director, id=id)
@@ -37,7 +43,9 @@ def get_director(request, id):
         return Response(status=200)
 
 
-
+class MovieListApiView(ListCreateAPIView):
+    queryset = Movie.objects.all
+    serializer_class = MovieSerializer
 @api_view(["GET", "POST"])
 def movie_list(request):
     if request.method == "GET":
@@ -52,7 +60,9 @@ def movie_list(request):
         return Response(serializer.errors)
 
 
-
+class MovieDeleteApiView(DestroyAPIView):
+    queryset = Movie.objects.all
+    serializer_class = MovieSerializer
 @api_view(["GET", "PUT", "DELETE"])
 def get_movie(request, id):
     movie = get_object_or_404(Movie, id=id)
@@ -68,7 +78,9 @@ def get_movie(request, id):
         movie.delete()
         return Response(status=200)
 
-
+class ReviewListApiView(ListCreateAPIView):
+    queryset = Review.objects.all
+    serializer_class = ReviewSerializer
 @api_view(["GET", "POST"])
 def review_list(request):
     if request.method == "GET":
@@ -82,7 +94,9 @@ def review_list(request):
             return Response(serializer.data)
         return Response(serializer.errors)
 
-
+class ReviewDeleteApiView(DestroyAPIView):
+    queryset = Review.objects.all
+    serializer_class = ReviewSerializer
 @api_view(["GET", "PUT", "DELETE"])
 def get_review(request, id):
     review = get_object_or_404(Review, id=id)
